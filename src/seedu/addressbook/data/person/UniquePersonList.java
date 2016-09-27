@@ -2,6 +2,7 @@ package seedu.addressbook.data.person;
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
+import seedu.addressbook.data.exception.IllegalValueException;
 
 import java.util.*;
 
@@ -92,6 +93,26 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+    
+    /**
+     * Edits the equivalent person from the list.
+     *
+     * @throws PersonNotFoundException if no such person could be found in the list.
+     * @throws IllegalValueException 
+     */
+    public void editPerson(ReadOnlyPerson toEdit, String detailType, String newDetail) throws PersonNotFoundException, IllegalValueException {
+        boolean personFoundAndEdited = false;
+        
+        for(Person person : internalList) {
+        	if(person.equals(toEdit)) {
+        		personFoundAndEdited = person.editAppropriateDetail(detailType, newDetail);
+        	}
+        }
+        
+        if (!personFoundAndEdited) {
+            throw new PersonNotFoundException();
+        }
     }
 
     /**
