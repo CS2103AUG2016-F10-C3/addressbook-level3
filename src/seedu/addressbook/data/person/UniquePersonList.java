@@ -101,17 +101,13 @@ public class UniquePersonList implements Iterable<Person> {
      * @throws PersonNotFoundException if no such person could be found in the list.
      * @throws IllegalValueException 
      */
-    public void editPerson(ReadOnlyPerson toEdit, String detailType, String newDetail) throws PersonNotFoundException, IllegalValueException {
+    public void editPerson(ReadOnlyPerson toEdit, String detailType, String newDetail) throws IllegalValueException {
         boolean personFoundAndEdited = false;
         
         for(Person person : internalList) {
         	if(person.equals(toEdit)) {
         		personFoundAndEdited = person.editAppropriateDetail(detailType, newDetail);
         	}
-        }
-        
-        if (!personFoundAndEdited) {
-            throw new PersonNotFoundException();
         }
     }
 

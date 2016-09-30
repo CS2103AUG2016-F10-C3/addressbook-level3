@@ -112,7 +112,7 @@ public class AddressBook {
      * @throws PersonNotFoundException if no such Person could be found.
      * @throws IllegalValueException 
      */
-    public void editPerson(ReadOnlyPerson toEdit, String detailType, String newDetail) throws PersonNotFoundException, IllegalValueException {
+    public void editPerson(ReadOnlyPerson toEdit, String detailType, String newDetail) throws IllegalValueException {
         allPersons.editPerson(toEdit, detailType, newDetail);
     }
 
