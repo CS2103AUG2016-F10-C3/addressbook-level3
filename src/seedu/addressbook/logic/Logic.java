@@ -16,7 +16,6 @@ import java.util.Optional;
  */
 public class Logic {
 
-
     private StorageFile storage;
     private AddressBook addressBook;
 
