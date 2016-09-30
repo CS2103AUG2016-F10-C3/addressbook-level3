@@ -67,6 +67,9 @@ public class Parser {
 
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
+                
+            case EditCommand.COMMAND_WORD:
+            	return prepareEdit(arguments);
 
             case FindCommand.COMMAND_WORD:
                 return prepareFind(arguments);
@@ -227,6 +230,28 @@ public class Parser {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
     }
+    
+    /**
+     * Parses arguments in the context of the edit person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEdit(String args) {
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE));
+        }
 
+        // keywords delimited by whitespace
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        
+        int targetIndex = Integer.parseInt(keywords[0]);
+        String detailType = keywords[1];
+        String newDetail = keywords[2];
+        
+        return new EditCommand(targetIndex, detailType, newDetail);
+    }
 
 }
